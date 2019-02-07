@@ -1,0 +1,126 @@
+class Node:
+    def __init__(self, data):
+        self.data=data
+        self.next=None
+class linked_list:
+    def __init__(self):
+        self.head=None
+#function to append the node
+    def insert(self, new_data):
+        new_node = Node(new_data)
+        if self.head is None:
+            self.head=new_node
+        else:
+            current=self.head
+            while True:
+                if current.next is None:
+                   break
+                current=current.next
+            current.next=new_node
+#function to print the linked list
+    def print_plus(self):
+        if self.head is None:
+            print('there is no data in the lists')
+        else:
+            current =self.head
+            while current:
+                print(current.data)
+                current=current.next
+#function to count total no of nodes and mapping the node data with position of the node
+    def counting(self):
+        refer={}
+        current=self.head
+        count=0
+        while current:
+            count=count+1
+            refer[count]=current.data
+            current=current.next
+        return count,refer
+#function to delete a specific node based on value 
+        
+    def delete_hi(self,value):
+        if self.head is None:
+            print("hello boss there is no data entered in to this linked lists")
+            return
+        temp=self.head
+        if temp.data==value:
+            self.head=temp.next
+            temp=None
+            return
+        while(temp is not None):
+            if(temp.data==value):
+                break
+            prev=temp
+            temp=temp.next
+        if (temp==None):
+            print('No list has the value')
+            return
+        prev.next=temp.next
+        temp=None
+#function to add the node at the begining
+    def push_baby(self,value):
+        if self.head is None:
+            self.head=Node(value)
+            return
+        temp=Node(value)
+        temp.next=self.head
+        self.head=temp
+        return
+#function to return the value of middle node 
+    def middle(self):
+        p=self.head
+        q=self.head
+        if p is None:
+            print('no elements in linked list')
+            return
+        while (q and q.next):
+            p=p.next
+            q=q.next.next
+        return p.data, 'is the middle element'
+#function to reverse the linked list
+    def reverse_hand(self):
+        before=None
+        current=self.head
+        if current is None:
+            return
+        after=current.next
+        while after:
+            current.next=before
+            before=current
+            current=after
+            after=after.next
+        current.next=before
+        self.head=current
+#place a new node at a given location
+#pos can be given 1 or start and for placing node at end  given as end
+    def place_my_data_at(self,new_data,pos):
+        count=1
+        if type(pos) is str:    
+            pos=pos.lower()
+        if type(pos) is int:
+            if pos<1:
+                print('i am not a magician bro i cant make it happen')
+                return
+        if pos=='start' or pos==1:
+            self.push_baby(new_data)
+            return
+        if pos=='end':
+            self.insert(new_data)
+            return
+        before=self.head
+        current=before.next
+        while current:
+            count=count+1
+            if pos==count:
+                temp=Node(new_data)
+                temp.next=current
+                before.next=temp
+                return
+            before=current
+            current=current.next
+        if pos==count+1:
+            self.insert(new_data)
+            
+        if pos>count+1:
+            print('i am not a dr.fixit to glue the things so sorry bro')
+            return
