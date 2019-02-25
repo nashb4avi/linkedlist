@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Feb 12 17:22:56 2019
+
+@author: work
+"""
+
+class stack:
+    def __init__(self):
+        self.items=[]
+    def push(self,data):
+        self.items.append(data)
+    def pop(self):
+        if len(self.items)==0:
+            print('no element is there to apply pop function')
+            return
+        print('propped the element {}'.format(self.items[-1]))
+        self.items=self.items[:-1]
+        return
+    def ret_stack(self):
+        print(self.items)
+s=stack()
+s.push('s')
+s.push('freedom')
+s.ret_stack()
+s.pop()
+s.pop()
+s.ret_stack()
