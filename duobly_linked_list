@@ -1,0 +1,165 @@
+class Node:
+    def __init__(self,data):
+        self.data =data 
+        self.prev=None
+        self.next=None
+class doubly_linked_list:
+    def __init__(self):
+        self.head=None
+    def append_them(self,new_data):
+        if self.head is None:
+            self.head=Node(new_data)
+            return
+        current=self.head
+        while current.next:
+            current=current.next
+        temp=Node(new_data)
+        temp.prev=current
+        current.next=temp
+        
+    def print_list(self):
+        if self.head is None:
+            print("hey bro how can i print if there is no node in the list")
+            return
+        current=self.head
+        count=0
+        refer={}
+        while current:
+            count+=1
+            try:
+                print(current.prev.data,end='<-----------')
+            except:
+                pass
+            refer[count]=current.data
+            current=current.next   
+        return count,refer
+    def push_me(self,new_data):
+        if self.head is None:
+            self.head=Node(new_data)
+            return
+        temp=Node(new_data)
+        current=self.head
+        self.head=temp
+        temp.next=current
+        current.prev=temp
+        return
+#to know how each and every node connection with adjacent nodes
+    def all_me(self):
+        current=self.head
+        while current:
+            try:
+                print(current.prev.data,end='<-----')
+            except:
+                #string 'except'to know the where exactly exception is triggered
+                print(current.prev,'except',end='<-----')
+                
+            print(current.data,end='----->')
+            try:
+                print(current.next.data)
+            except:
+                #string 'except'to know the where exactly exception is triggered
+                print(current.next,'except')
+                
+            current=current.next
+    def insert_at(self,new_data,pos):
+        if self.head is None and pos!=1:
+            print('I cant make it hapen')
+            return
+        if pos is 1:
+            self.push_me(new_data)
+            return
+        count=1
+        current=self.head
+        while current.next:
+            hi=current.next
+            count=count+1
+            if count==pos:
+                temp=Node(new_data)
+                temp.next=current.next
+                temp.prev=current
+                current.next=temp
+                hi.prev=temp
+                return
+            current=current.next
+        if pos is 'end' or pos==count+1:
+            self.append_them(new_data)
+            return
+        if pos>count+1:
+            print('so sorryyyyyyy')
+            return
+        
+    def delete_me(self,pos):
+        if self.head is None:
+            print("i can't do it rightnow add a node and then delete them ny dear")
+            return
+        curr=self.head
+        count=0
+        if pos==1 and curr.next is None:
+            curr=None
+            self.head=None
+            return
+        if pos==1:
+            nxt=curr.next
+            curr.next=None
+            curr=None
+            nxt.prev=None
+            self.head=nxt
+            return
+        while curr:
+            count=count+1
+            nxt=curr.next
+            prev=curr.prev
+            if count==pos:
+                if curr.next is None:
+                    prev.next=None
+                    curr.prev=None
+                    curr=None
+                    return
+                else:
+                    prev.next=curr.next
+                    nxt.prev=prev
+                    curr.prev=None
+                    curr.next=None
+                    curr=None
+                    return
+            curr=curr.next
+    def reverse_list(self):
+        if self.head is None:
+            return 
+        tmp=None
+        curr=self.head
+        while curr:
+            tmp=curr.prev
+            curr.prev,curr.next=curr.next,curr.prev
+            curr=curr.prev
+        if tmp:
+            self.head=tmp.prev
+        
+            
+
+            
+        
+        
+dl=doubly_linked_list()
+dl.print_list()
+dl.append_them(5)
+dl.append_them('daro')
+dl.append_them('deadskin')
+dl.append_them('fox')
+dl.append_them(84)
+dl.append_them('i am fucked')
+dl.push_me('I am the second')
+dl.push_me('I am the first')
+dl.insert_at("connect me at second",2)
+dl.insert_at('connect me at first',1)
+dl.insert_at('hello','end')
+print(dl.print_list())
+#dl.delete_me(1)
+#dl.delete_me(1)
+#dl.delete_me(4)
+#dl.delete_me(8)
+dl.reverse_list()
+print(dl.print_list())
+#dl.all_me()
+        
+        
