@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Feb 12 18:02:34 2019
+
+@author: work
+"""
+
+class queue:
+    def __init__(self):
+        self.items=[]
+    def enqueue(self,data):
+        self.items.insert(0,data)
+    def dequeue(self):
+        if len(self.items)==0:
+            print('no items are there to perform dequeue')
+            return
+        self.items=self.items[:-1]
+    def is_empty(self):
+        return len(self.items)==0
+    def ret_queue(self):
+        print(self.items)
+q=queue()
+print(q.is_empty())
+q.dequeue()
+q.enqueue('mountain')
+q.enqueue('stark')
+q.enqueue('maven')
+q.enqueue('raven')
+q.ret_queue()
+q.dequeue()
+q.ret_queue()
